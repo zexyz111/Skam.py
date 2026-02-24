@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Переход</title>
+<title>Secure VPN</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
 }
 
 body{
@@ -18,67 +18,115 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c3c);
-    background-size: 400% 400%;
-    animation: gradientMove 12s ease infinite;
+    background:#0a0f1c;
     overflow:hidden;
+    color:white;
 }
 
-@keyframes gradientMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+/* Анимированная сетка */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:
+        linear-gradient(rgba(0,255,200,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,200,0.07) 1px, transparent 1px);
+    background-size:60px 60px;
+    animation: moveGrid 20s linear infinite;
 }
 
+@keyframes moveGrid{
+    from{transform:translate(0,0);}
+    to{transform:translate(-60px,-60px);}
+}
+
+/* Карточка */
 .card{
-    backdrop-filter: blur(20px);
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 50px 40px;
-    border-radius: 25px;
+    position:relative;
+    backdrop-filter: blur(25px);
+    background: rgba(0, 20, 40, 0.75);
+    border:1px solid rgba(0,255,200,0.3);
+    border-radius:30px;
+    padding:60px 50px;
     text-align:center;
-    box-shadow: 0 0 40px rgba(0,0,0,0.4);
-    animation: fadeIn 1.2s ease forwards;
-    transform: translateY(30px);
+    box-shadow:0 0 60px rgba(0,255,200,0.15);
+    z-index:2;
+    animation:fadeUp 1.2s ease forwards;
     opacity:0;
+    transform:translateY(40px);
 }
 
-@keyframes fadeIn{
+@keyframes fadeUp{
     to{
         opacity:1;
-        transform: translateY(0);
+        transform:translateY(0);
     }
 }
 
 h1{
-    color:white;
-    margin-bottom:30px;
-    font-size:28px;
-    font-weight:600;
-    letter-spacing:1px;
+    font-size:30px;
+    margin-bottom:15px;
+    letter-spacing:2px;
+    color:#00ffc8;
+    text-shadow:0 0 15px rgba(0,255,200,0.8);
 }
 
+.status{
+    font-size:16px;
+    margin-bottom:40px;
+    color:#9fffe8;
+    opacity:0.9;
+}
+
+/* Кнопка */
 .button{
     display:inline-block;
-    padding:16px 35px;
-    border-radius:50px;
+    padding:18px 45px;
+    border-radius:60px;
     text-decoration:none;
-    color:white;
     font-size:18px;
     font-weight:600;
-    background: linear-gradient(45deg, #00c6ff, #0072ff);
-    box-shadow: 0 0 20px rgba(0,114,255,0.6);
+    letter-spacing:1px;
+    color:#001b22;
+    background:linear-gradient(45deg,#00ffc8,#00b3ff);
+    box-shadow:0 0 30px rgba(0,255,200,0.7);
     transition:0.3s ease;
     position:relative;
+    overflow:hidden;
 }
 
 .button:hover{
-    transform: scale(1.07);
-    box-shadow: 0 0 35px rgba(0,114,255,1);
+    transform:scale(1.08);
+    box-shadow:0 0 50px rgba(0,255,200,1);
 }
 
 .button:active{
-    transform: scale(0.95);
+    transform:scale(0.95);
+}
+
+/* Сканирующая линия */
+.scan{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg,transparent,#00ffc8,transparent);
+    animation:scanMove 3s linear infinite;
+}
+
+@keyframes scanMove{
+    0%{top:0;}
+    100%{top:100%;}
+}
+
+.footer{
+    position:absolute;
+    bottom:20px;
+    font-size:12px;
+    opacity:0.4;
+    letter-spacing:2px;
 }
 
 </style>
@@ -86,10 +134,16 @@ h1{
 <body>
 
 <div class="card">
-    <h1>Нажми для перехода</h1>
+    <div class="scan"></div>
+    <h1>SECURE CONNECTION</h1>
+    <div class="status">Ваше соединение защищено 🔒</div>
     <a class="button" href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678">
-        Перейти
+        Подключиться
     </a>
+</div>
+
+<div class="footer">
+    ENCRYPTED TUNNEL • PRIVATE ACCESS
 </div>
 
 </body>

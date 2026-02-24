@@ -3,171 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Escrow</title>
+<title>ESCROW</title>
 
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
 body{
-    background: radial-gradient(circle at center, #1a1f4d 0%, #0b0f2a 60%);
-    color:white;
-    padding-top:110px;
-    overflow-x:hidden;
+background:#050510;
+color:white;
+overflow-x:hidden;
 }
 
-/* HEADER */
+/* ===== ЖИДКИЙ ФОН ===== */
+
+.liquid-bg{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+overflow:hidden;
+}
+
+.blob{
+position:absolute;
+width:700px;
+height:700px;
+background:radial-gradient(circle at 30% 30%, #7a00ff, #2a0050);
+filter:blur(140px);
+border-radius:50%;
+animation:float 18s infinite ease-in-out;
+}
+
+.blob:nth-child(2){
+background:radial-gradient(circle at 70% 70%, #a855f7, #15002a);
+left:60%;
+top:40%;
+animation-delay:6s;
+}
+
+@keyframes float{
+0%{transform:translate(0,0) scale(1);}
+50%{transform:translate(100px,-80px) scale(1.2);}
+100%{transform:translate(0,0) scale(1);}
+}
+
+/* ===== HEADER ===== */
 
 header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:20px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    backdrop-filter:blur(15px);
-    background:rgba(10,15,35,0.65);
-    border-bottom:1px solid rgba(255,255,255,0.05);
-    z-index:1000;
+position:fixed;
+top:0;
+width:100%;
+padding:20px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(10,10,25,0.6);
+backdrop-filter:blur(20px);
+z-index:1000;
 }
 
 .logo{
-    font-size:26px;
-    font-weight:700;
-    letter-spacing:2px;
-    background:linear-gradient(90deg,#7f8cff,#c56cf0);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+font-size:22px;
+font-weight:600;
 }
 
-.lang{
-    opacity:0.7;
+.header-btn{
+background:rgba(255,255,255,0.1);
+border:none;
+color:white;
+padding:10px 18px;
+border-radius:30px;
+cursor:pointer;
+backdrop-filter:blur(10px);
+text-decoration:none;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 
 .hero{
-    text-align:center;
-    padding:40px 20px 60px;
-}
-
-.circle{
-    width:180px;
-    height:180px;
-    margin:0 auto 40px;
-    border-radius:50%;
-    background:radial-gradient(circle,#7f5af0,#1a1f4d);
-    filter:blur(30px);
+padding-top:150px;
+text-align:center;
+padding-bottom:100px;
 }
 
 .hero h1{
-    font-size:42px;
-    margin-bottom:20px;
-    font-weight:600;
+font-size:42px;
+margin-bottom:20px;
 }
 
 .hero p{
-    opacity:0.7;
-    max-width:500px;
-    margin:0 auto 40px;
-    line-height:1.6;
+color:#aaa;
+max-width:500px;
+margin:auto;
+line-height:1.6;
 }
 
-.btn{
-    display:inline-block;
-    padding:16px 40px;
-    border-radius:40px;
-    background:linear-gradient(90deg,#7f8cff,#c56cf0);
-    color:white;
-    font-weight:600;
-    text-decoration:none;
-    transition:0.3s;
+/* ===== 3D ПЛАНЕТА ===== */
+
+.planet{
+width:220px;
+height:220px;
+margin:50px auto 30px auto;
+border-radius:50%;
+background:radial-gradient(circle at 30% 30%, #c084ff, #6d28d9 60%, #2e026d);
+box-shadow:
+inset -40px -40px 80px rgba(0,0,0,0.6),
+0 0 100px rgba(140,0,255,0.7);
+animation:rotate 25s linear infinite;
 }
 
-.btn:hover{
-    transform:scale(1.05);
+@keyframes rotate{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
-/* CARDS */
+/* ===== CTA КНОПКА ===== */
+
+.cta-btn{
+display:inline-block;
+margin-top:20px;
+padding:16px 40px;
+border-radius:50px;
+font-size:18px;
+font-weight:600;
+text-decoration:none;
+color:white;
+background:linear-gradient(135deg,#7a00ff,#a855f7);
+box-shadow:0 0 40px rgba(140,0,255,0.6);
+transition:0.3s;
+}
+
+.cta-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 60px rgba(160,0,255,0.9);
+}
+
+/* ===== ПРЕИМУЩЕСТВА ===== */
 
 .section{
-    padding:40px 20px 80px;
+padding:80px 20px;
+text-align:center;
+}
+
+.section h2{
+font-size:34px;
+margin-bottom:50px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+max-width:1100px;
+margin:auto;
 }
 
 .card{
-    background:rgba(20,25,55,0.65);
-    backdrop-filter:blur(20px);
-    border-radius:25px;
-    padding:30px;
-    margin-bottom:25px;
-    border:1px solid rgba(255,255,255,0.05);
-    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+padding:30px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.08);
+transition:0.4s;
+min-height:200px;
+display:flex;
+flex-direction:column;
+justify-content:center;
 }
 
-.card h2{
-    font-size:26px;
-    margin-bottom:15px;
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 40px rgba(150,0,255,0.4);
+}
+
+.card h3{
+font-size:22px;
+margin-bottom:15px;
 }
 
 .card p{
-    opacity:0.7;
-    line-height:1.6;
-    margin-bottom:20px;
+color:#aaa;
+line-height:1.5;
+word-wrap:break-word;
 }
-
-.tag{
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:20px;
-    background:rgba(127,140,255,0.15);
-    font-size:14px;
-    opacity:0.9;
-}
-
 </style>
 </head>
-
 <body>
 
+<div class="liquid-bg">
+<div class="blob"></div>
+<div class="blob"></div>
+</div>
+
 <header>
-    <div class="logo">ESCROW</div>
-    <div class="lang">RU</div>
+<div class="logo">ESCROW</div>
+<a class="header-btn" href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678" target="_blank">
+Подключиться
+</a>
 </header>
 
 <section class="hero">
-    <div class="circle"></div>
-    <h1>ESCROW</h1>
-    <p>Защищаем деньги до подтверждения сделки обеими сторонами</p>
-    <a href="#" class="btn">Подключиться безопасно</a>
+<h1>ESCROW</h1>
+<p>Безопасные сделки с полной защитой средств и гарантией выполнения условий.</p>
+
+<div class="planet"></div>
+
+<a class="cta-btn" 
+href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678" 
+target="_blank">
+Подключиться
+</a>
+
 </section>
 
 <section class="section">
+<h2>Преимущества</h2>
 
-    <div class="card">
-        <h2>Защищённые сделки</h2>
-        <p>Средства блокируются и возвращаются только после подтверждения обеими сторонами.</p>
-        <div class="tag">Надёжно</div>
-    </div>
+<div class="cards">
 
-    <div class="card">
-        <h2>Конфиденциальность</h2>
-        <p>Все операции проходят через защищённые протоколы и современные алгоритмы шифрования.</p>
-        <div class="tag">Конфиденциально</div>
-    </div>
+<div class="card">
+<h3>🔒 Безопасность</h3>
+<p>Средства хранятся до выполнения условий сделки</p>
+</div>
 
-    <div class="card">
-        <h2>Моментальные подтверждения</h2>
-        <p>Проверка статусов и подтверждения проходят без задержек.</p>
-        <div class="tag">Моментально</div>
-    </div>
+<div class="card">
+<h3>⚡ Быстро</h3>
+<p>Мгновенное подтверждение операций</p>
+</div>
 
+<div class="card">
+<h3>📜 Прозрачность</h3>
+<p>Все условия фиксируются заранее</p>
+</div>
+
+<div class="card">
+<h3>🌍 Онлайн</h3>
+<p>Работает из любой точки мира</p>
+</div>
+
+<div class="card">
+<h3>🤝 Гарантия</h3>
+<p>Защита интересов обеих сторон</p>
+</div>
+
+</div>
 </section>
 
 </body>

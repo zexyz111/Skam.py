@@ -3,148 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secure VPN</title>
+<title>FastConnect</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:'Segoe UI', sans-serif;
 }
 
 body{
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* ===== HERO ===== */
+
+.hero{
     height:100vh;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    background:#0a0f1c;
-    overflow:hidden;
-    color:white;
-}
-
-/* Анимированная сетка */
-body::before{
-    content:"";
-    position:absolute;
-    width:200%;
-    height:200%;
-    background:
-        linear-gradient(rgba(0,255,200,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,200,0.07) 1px, transparent 1px);
-    background-size:60px 60px;
-    animation: moveGrid 20s linear infinite;
-}
-
-@keyframes moveGrid{
-    from{transform:translate(0,0);}
-    to{transform:translate(-60px,-60px);}
-}
-
-/* Карточка */
-.card{
-    position:relative;
-    backdrop-filter: blur(25px);
-    background: rgba(0, 20, 40, 0.75);
-    border:1px solid rgba(0,255,200,0.3);
-    border-radius:30px;
-    padding:60px 50px;
     text-align:center;
-    box-shadow:0 0 60px rgba(0,255,200,0.15);
-    z-index:2;
-    animation:fadeUp 1.2s ease forwards;
-    opacity:0;
-    transform:translateY(40px);
+    padding:20px;
+    background: radial-gradient(circle at center, #0a1a2f 0%, #000 70%);
 }
 
-@keyframes fadeUp{
-    to{
-        opacity:1;
-        transform:translateY(0);
+.hero h1{
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.hero span{
+    color:#3da9ff;
+}
+
+.hero p{
+    max-width:500px;
+    opacity:0.7;
+    margin-bottom:35px;
+    line-height:1.5;
+}
+
+.main-btn{
+    padding:16px 35px;
+    border-radius:50px;
+    background:linear-gradient(90deg,#2f80ed,#56ccf2);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    font-size:16px;
+    transition:0.3s ease;
+    box-shadow:0 0 25px rgba(61,169,255,0.4);
+}
+
+.main-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 35px rgba(61,169,255,0.6);
+}
+
+/* ===== ПРЕИМУЩЕСТВА ===== */
+
+.advantages{
+    padding:80px 20px;
+}
+
+.advantages h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:40px;
+}
+
+.adv-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    max-width:700px;
+    margin:0 auto;
+}
+
+.adv-card{
+    background:rgba(255,255,255,0.04);
+    border-radius:22px;
+    padding:24px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.06);
+    backdrop-filter:blur(10px);
+    transition:0.3s ease;
+}
+
+.adv-card:hover{
+    transform:translateY(-5px);
+    background:rgba(255,255,255,0.08);
+}
+
+.icon{
+    font-size:30px;
+    margin-bottom:12px;
+    display:block;
+}
+
+.adv-card h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.adv-card p{
+    font-size:14px;
+    opacity:0.6;
+}
+
+.wide{
+    grid-column:span 2;
+}
+
+/* ===== АДАПТАЦИЯ ===== */
+
+@media(max-width:480px){
+    .hero h1{
+        font-size:30px;
+    }
+    .advantages h2{
+        font-size:26px;
     }
 }
-
-h1{
-    font-size:30px;
-    margin-bottom:15px;
-    letter-spacing:2px;
-    color:#00ffc8;
-    text-shadow:0 0 15px rgba(0,255,200,0.8);
-}
-
-.status{
-    font-size:16px;
-    margin-bottom:40px;
-    color:#9fffe8;
-    opacity:0.9;
-}
-
-/* Кнопка */
-.button{
-    display:inline-block;
-    padding:18px 45px;
-    border-radius:60px;
-    text-decoration:none;
-    font-size:18px;
-    font-weight:600;
-    letter-spacing:1px;
-    color:#001b22;
-    background:linear-gradient(45deg,#00ffc8,#00b3ff);
-    box-shadow:0 0 30px rgba(0,255,200,0.7);
-    transition:0.3s ease;
-    position:relative;
-    overflow:hidden;
-}
-
-.button:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 50px rgba(0,255,200,1);
-}
-
-.button:active{
-    transform:scale(0.95);
-}
-
-/* Сканирующая линия */
-.scan{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:3px;
-    background:linear-gradient(90deg,transparent,#00ffc8,transparent);
-    animation:scanMove 3s linear infinite;
-}
-
-@keyframes scanMove{
-    0%{top:0;}
-    100%{top:100%;}
-}
-
-.footer{
-    position:absolute;
-    bottom:20px;
-    font-size:12px;
-    opacity:0.4;
-    letter-spacing:2px;
-}
-
 </style>
 </head>
+
 <body>
 
-<div class="card">
-    <div class="scan"></div>
-    <h1>SECURE CONNECTION</h1>
-    <div class="status">Ваше соединение защищено 🔒</div>
-    <a class="button" href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678">
-        Подключиться
+<!-- HERO -->
+<section class="hero">
+    <h1>Мобильный интернет <span>без границ</span></h1>
+    <p>Стабильное подключение к глобальной сети в один клик. Работает там, где другие не справляются.</p>
+    
+    <a href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678" target="_blank" class="main-btn">
+        Перейти в бота
     </a>
-</div>
+</section>
 
-<div class="footer">
-    ENCRYPTED TUNNEL • PRIVATE ACCESS
-</div>
+<!-- ПРЕИМУЩЕСТВА -->
+<section class="advantages">
+    <h2>Преимущества</h2>
+
+    <div class="adv-grid">
+
+        <div class="adv-card">
+            <span class="icon">🌍</span>
+            <h3>Глобальный доступ</h3>
+            <p>Подключение к зарубежным сервисам</p>
+        </div>
+
+        <div class="adv-card">
+            <span class="icon">⚡</span>
+            <h3>Скорость</h3>
+            <p>Стабильное соединение без задержек</p>
+        </div>
+
+        <div class="adv-card">
+            <span class="icon">☝️</span>
+            <h3>Один клик</h3>
+            <p>Мгновенное подключение</p>
+        </div>
+
+        <div class="adv-card">
+            <span class="icon">∞</span>
+            <h3>Безлимит</h3>
+            <p>Без ограничений по трафику</p>
+        </div>
+
+        <div class="adv-card wide">
+            <span class="icon">📱</span>
+            <h3>3 устройства</h3>
+            <p>Одна подписка на всю семью</p>
+        </div>
+
+    </div>
+</section>
 
 </body>
 </html>

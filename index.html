@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Переход</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c3c);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+    overflow:hidden;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.card{
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 50px 40px;
+    border-radius: 25px;
+    text-align:center;
+    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+    animation: fadeIn 1.2s ease forwards;
+    transform: translateY(30px);
+    opacity:0;
+}
+
+@keyframes fadeIn{
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+h1{
+    color:white;
+    margin-bottom:30px;
+    font-size:28px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.button{
+    display:inline-block;
+    padding:16px 35px;
+    border-radius:50px;
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    box-shadow: 0 0 20px rgba(0,114,255,0.6);
+    transition:0.3s ease;
+    position:relative;
+}
+
+.button:hover{
+    transform: scale(1.07);
+    box-shadow: 0 0 35px rgba(0,114,255,1);
+}
+
+.button:active{
+    transform: scale(0.95);
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Нажми для перехода</h1>
+    <a class="button" href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678">
+        Перейти
+    </a>
+</div>
+
+</body>
+</html>

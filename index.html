@@ -3,187 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FastConnect</title>
+<title>Secure VPN</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
 }
 
 body{
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
-}
-
-/* ===== HERO ===== */
-
-.hero{
     height:100vh;
+    background:#050b18;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
+    overflow:hidden;
+    font-family:'Segoe UI',sans-serif;
+    color:white;
+}
+
+.container{
     text-align:center;
-    padding:20px;
-    background: radial-gradient(circle at center, #0a1a2f 0%, #000 70%);
 }
 
-.hero h1{
-    font-size:38px;
-    font-weight:700;
-    margin-bottom:15px;
+/* Планета */
+.planet-wrapper{
+    position:relative;
+    width:260px;
+    height:260px;
+    margin:0 auto 40px;
 }
 
-.hero span{
-    color:#3da9ff;
+.planet{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #1e3a8a, #0a0f1f 70%);
+    box-shadow:
+        0 0 40px rgba(56,189,248,0.5),
+        inset 0 0 60px rgba(0,150,255,0.4);
+    animation: rotatePlanet 20s linear infinite;
+    position:absolute;
 }
 
-.hero p{
-    max-width:500px;
-    opacity:0.7;
-    margin-bottom:35px;
-    line-height:1.5;
+@keyframes rotatePlanet{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
 }
 
-.main-btn{
-    padding:16px 35px;
-    border-radius:50px;
-    background:linear-gradient(90deg,#2f80ed,#56ccf2);
-    color:#fff;
+/* Сетка на планете */
+.planet::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:
+        repeating-linear-gradient(
+            transparent 0px,
+            rgba(56,189,248,0.15) 1px,
+            transparent 2px,
+            transparent 20px
+        );
+    animation: rotatePlanet 30s linear infinite reverse;
+}
+
+/* Орбиты */
+.orbit{
+    position:absolute;
+    inset:-25px;
+    border:1px solid rgba(56,189,248,0.25);
+    border-radius:50%;
+    animation: rotateOrbit 25s linear infinite;
+}
+
+.orbit:nth-child(2){
+    inset:-45px;
+    animation-duration:35s;
+}
+
+@keyframes rotateOrbit{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+/* Частица */
+.particle{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:#22c55e;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform-origin:-120px;
+    animation: rotateParticle 6s linear infinite;
+    box-shadow:0 0 12px #22c55e;
+}
+
+.particle:nth-child(4){
+    animation-duration:9s;
+    background:#38bdf8;
+    box-shadow:0 0 12px #38bdf8;
+}
+
+@keyframes rotateParticle{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+h1{
+    font-size:28px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    opacity:0.6;
+    margin-bottom:30px;
+}
+
+/* Кнопка */
+.button{
+    display:inline-block;
+    padding:16px 40px;
+    border-radius:25px;
+    background:#38bdf8;
+    color:#051221;
     text-decoration:none;
     font-weight:600;
-    font-size:16px;
-    transition:0.3s ease;
-    box-shadow:0 0 25px rgba(61,169,255,0.4);
+    transition:0.3s;
 }
 
-.main-btn:hover{
+.button:hover{
+    background:#0ea5e9;
     transform:translateY(-3px);
-    box-shadow:0 0 35px rgba(61,169,255,0.6);
 }
 
-/* ===== ПРЕИМУЩЕСТВА ===== */
-
-.advantages{
-    padding:80px 20px;
-}
-
-.advantages h2{
-    text-align:center;
-    font-size:32px;
-    margin-bottom:40px;
-}
-
-.adv-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-    max-width:700px;
-    margin:0 auto;
-}
-
-.adv-card{
-    background:rgba(255,255,255,0.04);
-    border-radius:22px;
-    padding:24px;
-    text-align:center;
-    border:1px solid rgba(255,255,255,0.06);
-    backdrop-filter:blur(10px);
-    transition:0.3s ease;
-}
-
-.adv-card:hover{
-    transform:translateY(-5px);
-    background:rgba(255,255,255,0.08);
-}
-
-.icon{
-    font-size:30px;
-    margin-bottom:12px;
-    display:block;
-}
-
-.adv-card h3{
-    font-size:18px;
-    margin-bottom:8px;
-}
-
-.adv-card p{
-    font-size:14px;
-    opacity:0.6;
-}
-
-.wide{
-    grid-column:span 2;
-}
-
-/* ===== АДАПТАЦИЯ ===== */
-
-@media(max-width:480px){
-    .hero h1{
-        font-size:30px;
-    }
-    .advantages h2{
-        font-size:26px;
-    }
-}
 </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section class="hero">
-    <h1>Мобильный интернет <span>без границ</span></h1>
-    <p>Стабильное подключение к глобальной сети в один клик. Работает там, где другие не справляются.</p>
-    
-    <a href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678" target="_blank" class="main-btn">
-        Перейти в бота
-    </a>
-</section>
+<div class="container">
 
-<!-- ПРЕИМУЩЕСТВА -->
-<section class="advantages">
-    <h2>Преимущества</h2>
-
-    <div class="adv-grid">
-
-        <div class="adv-card">
-            <span class="icon">🌍</span>
-            <h3>Глобальный доступ</h3>
-            <p>Подключение к зарубежным сервисам</p>
-        </div>
-
-        <div class="adv-card">
-            <span class="icon">⚡</span>
-            <h3>Скорость</h3>
-            <p>Стабильное соединение без задержек</p>
-        </div>
-
-        <div class="adv-card">
-            <span class="icon">☝️</span>
-            <h3>Один клик</h3>
-            <p>Мгновенное подключение</p>
-        </div>
-
-        <div class="adv-card">
-            <span class="icon">∞</span>
-            <h3>Безлимит</h3>
-            <p>Без ограничений по трафику</p>
-        </div>
-
-        <div class="adv-card wide">
-            <span class="icon">📱</span>
-            <h3>3 устройства</h3>
-            <p>Одна подписка на всю семью</p>
-        </div>
-
+    <div class="planet-wrapper">
+        <div class="planet"></div>
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-</section>
+
+    <h1>FASTCON</h1>
+    <div class="subtitle">Connect freely</div>
+
+    <a class="button" href="https://t.me/obhod_mobilniy_bot?start=ref_8311892678">
+        Подключиться
+    </a>
+
+</div>
 
 </body>
 </html>
